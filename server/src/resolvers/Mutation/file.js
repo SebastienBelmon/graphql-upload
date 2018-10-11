@@ -1,4 +1,4 @@
-const { processUpload } = require('../../lowdb');
+const { processUpload } = require('../../localImages');
 
 
 
