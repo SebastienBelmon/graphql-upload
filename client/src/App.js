@@ -11,7 +11,7 @@ const client = new ApolloClient({
   link: createUploadLink({
     uri: 'http://localhost:4000',
   }),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 
 class App extends React.Component {
@@ -21,11 +21,11 @@ class App extends React.Component {
         Hello There!
         <div>
           <h1>Upload file</h1>
-          <UploadFile/>
+          <UploadFile />
         </div>
         <div>
           <h1>List of file (dowload ?)</h1>
-          <Files/>
+          <Files />
         </div>
       </ApolloProvider>
     );

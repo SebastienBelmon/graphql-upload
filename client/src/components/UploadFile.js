@@ -4,32 +4,32 @@ import { Mutation } from 'react-apollo';
 import { UPLOADFILE_MUTATION } from '../mutations/uploadFileMutation';
 
 class UploadFile extends React.Component {
-
   async handleChange(e, singleUpload) {
     const { files } = e.target;
 
-    console.log(files[0])
+    console.log(files[0]);
 
     await singleUpload({
       variables: {
         filename: files[0].name,
         file: files[0],
-      }
+      },
     });
   }
 
   render() {
     return (
-      <Mutation
-        mutation={UPLOADFILE_MUTATION}
-      >
-        {(singleUpload) => (
+      <Mutation mutation={UPLOADFILE_MUTATION}>
+        {singleUpload => (
           <React.Fragment>
-            <input type='file' onChange={e => this.handleChange(e, singleUpload)} />
+            <input
+              type="file"
+              onChange={e => this.handleChange(e, singleUpload)}
+            />
           </React.Fragment>
         )}
       </Mutation>
-    )
+    );
   }
 }
 

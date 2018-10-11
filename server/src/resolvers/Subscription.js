@@ -9,10 +9,10 @@ const Subscription = {
             },
           },
         },
-        info,
-      )
+        info
+      );
     },
   },
-}
+};
 
-module.exports = { Subscription }
+module.exports = { Subscription };

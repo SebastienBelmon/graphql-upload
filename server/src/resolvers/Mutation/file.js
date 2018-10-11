@@ -1,7 +1,5 @@
 const { processUpload } = require('../../localImages');
 
-
-
 const file = {
   async singleUpload(parent, { filename, file }, ctx, info) {
     return ctx.db.mutation.createFile(
@@ -12,7 +10,7 @@ const file = {
         },
       },
       info
-    )
+    );
   },
 };
 
