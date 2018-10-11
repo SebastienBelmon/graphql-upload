@@ -1,18 +1,11 @@
 const { GraphQLServer } = require('graphql-yoga')
 const { Prisma } = require('prisma-binding')
 const resolvers = require('./resolvers')
+const express = require('express');
 
 const { recordFile } = require('./localImages');
 
-// upload file code
-const processUpload = async upload => {
-  // get data from uploading file
-  const { stream, filename, mimetype, encoding } = await upload;
-  const { id, path } = await storeUpload({ stream, filename });
-
-  // push it to our "DB" (storage ?)
-  return recordFile({ id, filename, mimetype, encoding, path });
-}
+const app = express();
 
 /** PRISMA GRAPHQL SERVER */
 const db = new Prisma({
@@ -27,6 +20,8 @@ const server = new GraphQLServer({
   resolvers,
   context: req => ({ ...req, db }),
 })
+
+server.use('/static', express.static('images'));
 
 server.get('/images/:file', (req, res) => {
   const file = 'images/' + req.params.file;
