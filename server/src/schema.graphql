@@ -1,4 +1,5 @@
 # import Post from "./generated/prisma.graphql"
+# import File from "./generated/prisma.graphql"
 
 scalar Upload
 
@@ -7,6 +8,7 @@ type Query {
   drafts: [Post!]!
   post(id: ID!): Post
   me: User
+  files: [File!]!
 }
 
 type Mutation {
@@ -33,11 +35,5 @@ type User {
   email: String!
   name: String!
   posts: [Post!]!
-}
 
-type File {
-  id: ID!
-  path: String!
-  filename: String!
 }
-

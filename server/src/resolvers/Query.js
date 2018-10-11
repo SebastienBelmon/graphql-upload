@@ -26,6 +26,10 @@ const Query = {
     const id = getUserId(ctx)
     return ctx.db.query.user({ where: { id } }, info)
   },
+
+  files(parent, { where }, ctx, info) {
+    return ctx.db.query.files({ where }, info);
+  }
 }
 
 module.exports = { Query }

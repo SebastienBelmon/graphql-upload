@@ -4,11 +4,11 @@ const { processUpload } = require('../../lowdb');
 
 const file = {
   async singleUpload(parent, { filename, file }, ctx, info) {
-    return ctx.db.mutation.singleUpload(
+    return ctx.db.mutation.createFile(
       {
         data: {
           filename,
-          file: await processUpload(file),
+          path: await processUpload(file),
         },
       },
       info

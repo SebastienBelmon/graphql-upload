@@ -1,12 +1,14 @@
+const fs = require('fs');
+
 const shortid = require('shortid');
 
 const storeUpload = async ({ stream, filename }) => {
   const id = shortid.generate()
-  const path = `${uploadDir}/${id}-${filename}`
+  const path = `images/${filename}-${id}`
 
   return new Promise((resolve, reject) =>
     stream
-      .pipe(createWriteStream(path))
+      .pipe(fs.createWriteStream(path))
       .on('finish', () => resolve({ path }))
       .on('error', reject),
   )
