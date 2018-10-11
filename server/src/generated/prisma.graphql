@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/public-helixshriek-638/graphql-upload/dev
-# timestamp: Thu Oct 11 2018 10:02:05 GMT+0200 (Paris, Madrid (heure d’été))
+# timestamp: Thu Oct 11 2018 15:00:28 GMT+0200 (Paris, Madrid (heure d’été))
 
 type AggregateFile {
   count: Int!
@@ -24,8 +24,6 @@ type File implements Node {
   id: ID!
   path: String!
   filename: String!
-  mimetype: String!
-  encoding: String!
 }
 
 """A connection to a list of items."""
@@ -41,8 +39,6 @@ type FileConnection {
 input FileCreateInput {
   path: String!
   filename: String!
-  mimetype: String!
-  encoding: String!
 }
 
 """An edge in a connection."""
@@ -61,10 +57,6 @@ enum FileOrderByInput {
   path_DESC
   filename_ASC
   filename_DESC
-  mimetype_ASC
-  mimetype_DESC
-  encoding_ASC
-  encoding_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -75,8 +67,6 @@ type FilePreviousValues {
   id: ID!
   path: String!
   filename: String!
-  mimetype: String!
-  encoding: String!
 }
 
 type FileSubscriptionPayload {
@@ -121,8 +111,6 @@ input FileSubscriptionWhereInput {
 input FileUpdateInput {
   path: String
   filename: String
-  mimetype: String
-  encoding: String
 }
 
 input FileWhereInput {
@@ -254,86 +242,6 @@ input FileWhereInput {
 
   """All values not ending with the given string."""
   filename_not_ends_with: String
-  mimetype: String
-
-  """All values that are not equal to given value."""
-  mimetype_not: String
-
-  """All values that are contained in given list."""
-  mimetype_in: [String!]
-
-  """All values that are not contained in given list."""
-  mimetype_not_in: [String!]
-
-  """All values less than the given value."""
-  mimetype_lt: String
-
-  """All values less than or equal the given value."""
-  mimetype_lte: String
-
-  """All values greater than the given value."""
-  mimetype_gt: String
-
-  """All values greater than or equal the given value."""
-  mimetype_gte: String
-
-  """All values containing the given string."""
-  mimetype_contains: String
-
-  """All values not containing the given string."""
-  mimetype_not_contains: String
-
-  """All values starting with the given string."""
-  mimetype_starts_with: String
-
-  """All values not starting with the given string."""
-  mimetype_not_starts_with: String
-
-  """All values ending with the given string."""
-  mimetype_ends_with: String
-
-  """All values not ending with the given string."""
-  mimetype_not_ends_with: String
-  encoding: String
-
-  """All values that are not equal to given value."""
-  encoding_not: String
-
-  """All values that are contained in given list."""
-  encoding_in: [String!]
-
-  """All values that are not contained in given list."""
-  encoding_not_in: [String!]
-
-  """All values less than the given value."""
-  encoding_lt: String
-
-  """All values less than or equal the given value."""
-  encoding_lte: String
-
-  """All values greater than the given value."""
-  encoding_gt: String
-
-  """All values greater than or equal the given value."""
-  encoding_gte: String
-
-  """All values containing the given string."""
-  encoding_contains: String
-
-  """All values not containing the given string."""
-  encoding_not_contains: String
-
-  """All values starting with the given string."""
-  encoding_starts_with: String
-
-  """All values not starting with the given string."""
-  encoding_not_starts_with: String
-
-  """All values ending with the given string."""
-  encoding_ends_with: String
-
-  """All values not ending with the given string."""
-  encoding_not_ends_with: String
 }
 
 input FileWhereUniqueInput {

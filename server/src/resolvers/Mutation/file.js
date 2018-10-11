@@ -3,12 +3,16 @@ const { processUpload } = require('../../lowdb');
 
 
 const file = {
-  singleUpload(parent, { file }, ctx, info) {
-    return processUpload(file);
-  },
-
-  multipleUpload(parent, { files }, ctx, info) {
-    return Promise.all(files.map(processUpload));
+  async singleUpload(parent, { filename, file }, ctx, info) {
+    return ctx.db.mutation.singleUpload(
+      {
+        data: {
+          filename,
+          file: await processUpload(file),
+        },
+      },
+      info
+    )
   },
 };
 

@@ -15,7 +15,7 @@ type Mutation {
   createDraft(title: String!, text: String!): Post!
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
-  singleUpload (file: Upload!): File!
+  singleUpload (filename: String!, file: Upload!): File!
   multipleUpload (files: [Upload!]!): [File!]!
 }
 
@@ -39,7 +39,5 @@ type File {
   id: ID!
   path: String!
   filename: String!
-  mimetype: String!
-  encoding: String!
 }
 
