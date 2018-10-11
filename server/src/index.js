@@ -1,7 +1,6 @@
 const { GraphQLServer } = require('graphql-yoga')
 const { Prisma } = require('prisma-binding')
 const resolvers = require('./resolvers')
-const path = require('path');
 
 const { recordFile } = require('./localImages');
 
@@ -31,7 +30,6 @@ const server = new GraphQLServer({
 
 server.get('/images/:file', (req, res) => {
   const file = 'images/' + req.params.file;
-
   console.log(file)
 
   res.download(file);
