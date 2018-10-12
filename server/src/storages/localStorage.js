@@ -1,5 +1,4 @@
 const fs = require('fs');
-
 const shortid = require('shortid');
 
 const storeUpload = async ({ stream, filename }) => {

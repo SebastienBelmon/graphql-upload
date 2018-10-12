@@ -4,20 +4,28 @@ const {
   processUpload,
   processDeleteFile,
   processUpdateFile,
-} = require('../../localImages');
+} = require('../../storages/localStorage');
+
+const {
+  // getPublicUrl,
+  processUploadGCS,
+} = require('../../storages/googleCloudStorage');
 
 const file = {
   // UPLOAD A FILE
   async singleUpload(parent, { filename, file }, ctx, info) {
-    return ctx.db.mutation.createFile(
-      {
-        data: {
-          filename,
-          path: await processUpload(file),
-        },
-      },
-      info
-    );
+
+    await processUploadGCS(file);
+    
+    // return ctx.db.mutation.createFile(
+    //   {
+    //     data: {
+    //       filename,
+    //       path: await processUpload(file),
+    //     },
+    //   },
+    //   info
+    // );
   },
 
   // MULTIPLE UPLOAD

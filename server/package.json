@@ -8,11 +8,13 @@
     "format": "prettier --write \"src/**/*.js\""
   },
   "dependencies": {
+    "@google-cloud/storage": "^2.1.0",
     "bcryptjs": "2.4.3",
     "graphql-yoga": "1.16.2",
     "jsonwebtoken": "8.3.0",
     "lowdb": "^1.0.0",
     "mkdirp": "^0.5.1",
+    "multer": "^1.4.1",
     "prisma-binding": "2.1.6",
     "promises-all": "^1.0.0",
     "shortid": "^2.2.13"
