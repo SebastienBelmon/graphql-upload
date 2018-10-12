@@ -1,11 +1,12 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 
 import { FILES_QUERY } from '../queries/uploads';
+import { DELETEFILE_MUTATION } from '../mutations/fileMutations';
 
 const Files = () => {
   return (
-    <Query query={FILES_QUERY}>
+    <Query query={FILES_QUERY} pollInterval={1500}>
       {({ data: { files }, loading, error }) => {
         if (loading) {
           return <div>Loading Files...</div>;
@@ -22,6 +23,7 @@ const Files = () => {
                 <th>filename</th>
                 <th>path</th>
                 <th>download link</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -40,13 +42,27 @@ const Files = () => {
                       </a>
                     </td>
                     <td>
-                      <a
-                        href={`http://localhost:4000/${path}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                      <a href={`http://localhost:4000/${path}`} download>
                         Download
                       </a>
+                    </td>
+                    <td>
+                      <Mutation mutation={DELETEFILE_MUTATION}>
+                        {deleteFile => (
+                          <button
+                            onClick={() =>
+                              deleteFile({
+                                variables: {
+                                  id,
+                                  path,
+                                },
+                              })
+                            }
+                          >
+                            Delete
+                          </button>
+                        )}
+                      </Mutation>
                     </td>
                   </tr>
                 );

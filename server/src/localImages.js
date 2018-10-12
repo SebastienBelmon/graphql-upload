@@ -19,8 +19,15 @@ const processUpload = async upload => {
   const { stream, filename, mimetype, encoding } = await upload;
   const { path } = await storeUpload({ stream, filename });
 
-  // push it to our "DB" (storage ?)
+  // return the local path of the file
   return path;
 };
 
-module.exports = { processUpload };
+const processDeleteFile = async path => {
+  fs.unlink(path, err => {
+    if (err) throw err;
+    console.log(`${path} à été supprimé`);
+  });
+};
+
+module.exports = { processUpload, processDeleteFile };

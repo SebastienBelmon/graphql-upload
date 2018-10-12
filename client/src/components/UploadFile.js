@@ -1,7 +1,7 @@
 import React from 'react';
 import { Mutation } from 'react-apollo';
 
-import { UPLOADFILE_MUTATION } from '../mutations/uploadFileMutation';
+import { UPLOADFILE_MUTATION } from '../mutations/fileMutations';
 
 class UploadFile extends React.Component {
   async handleChange(e, singleUpload) {

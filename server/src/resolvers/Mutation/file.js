@@ -1,6 +1,6 @@
 const prisma = require('prisma-binding');
 
-const { processUpload } = require('../../localImages');
+const { processUpload, processDeleteFile } = require('../../localImages');
 
 const file = {
   // UPLOAD A FILE
@@ -21,7 +21,15 @@ const file = {
   //? puis on supprime également le node graphql
   //* créer une fonction processDeleteFile
   // A MODIFIER
-  deleteFile: prisma.forwardTo('db'),
+  async deleteFile(parent, { id, path }, ctx, info) {
+    processDeleteFile(path);
+
+    return ctx.db.mutation.deleteFile({
+      where: {
+        id,
+      },
+    });
+  },
 
   // TODO !
   //? Idée : On trouve le fichier sur le serve avec 'fs', et on le renomme
@@ -33,8 +41,8 @@ const file = {
       where,
       data: {
         filename,
-      }
-    })
+      },
+    });
   },
 };
 
