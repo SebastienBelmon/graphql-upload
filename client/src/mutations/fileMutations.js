@@ -10,6 +10,16 @@ const UPLOADFILE_MUTATION = gql`
   }
 `;
 
+const MULTIPLEUPLOADFILES_MUTATION = gql`
+  mutation multipleUpload($names: [String!]!, $files: [Upload!]!) {
+    multipleUpload(names: $names, files: $files) {
+      id
+      path
+      filename
+    }
+  }
+`;
+
 const DELETEFILE_MUTATION = gql`
   mutation deleteFile($id: ID!, $path: String!) {
     deleteFile(id: $id, path: $path) {
@@ -30,4 +40,9 @@ const UPDATEFILE_MUTATION = gql`
   }
 `;
 
-export { UPLOADFILE_MUTATION, DELETEFILE_MUTATION, UPDATEFILE_MUTATION };
+export {
+  UPLOADFILE_MUTATION,
+  MULTIPLEUPLOADFILES_MUTATION,
+  DELETEFILE_MUTATION,
+  UPDATEFILE_MUTATION,
+};

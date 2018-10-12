@@ -1,4 +1,4 @@
-const prisma = require('prisma-binding');
+const promisesAll = require('promises-all');
 
 const {
   processUpload,
@@ -18,6 +18,30 @@ const file = {
       },
       info
     );
+  },
+
+  // MULTIPLE UPLOAD
+  async multipleUpload(parent, { names, files }, ctx, info) {
+    // resolve will get all files pathnames as an array
+    const { resolve, reject } = await promisesAll.all(files.map(processUpload));
+
+    if (reject.length) {
+      reject.forEach(({ name, message }) =>
+        console.error(`${name}: ${message}`)
+      );
+    }
+
+    console.log(names);
+    console.log(resolve);
+
+    files.map((file, i) => {
+      ctx.db.mutation.createFile({
+        data: {
+          filename: names[i],
+          path: resolve[i],
+        },
+      });
+    });
   },
 
   // DELETE A FILE

@@ -5,6 +5,7 @@ import { createUploadLink } from 'apollo-upload-client';
 import { ApolloProvider } from 'react-apollo';
 
 import UploadFile from './components/UploadFile';
+import UploadFiles from './components/UploadFiles';
 import Files from './components/Files';
 
 const client = new ApolloClient({
@@ -22,6 +23,10 @@ class App extends React.Component {
         <div>
           <h1>Upload file</h1>
           <UploadFile />
+        </div>
+        <div>
+          <h1>Upload Multiple files</h1>
+          <UploadFiles />
         </div>
         <div>
           <h1>List of file (dowload ?)</h1>

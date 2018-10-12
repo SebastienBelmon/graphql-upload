@@ -18,7 +18,7 @@ type Mutation {
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
   singleUpload(filename: String!, file: Upload!): File!
-  multipleUpload(files: [Upload!]!): [File!]!
+  multipleUpload(names: [String!]!, files: [Upload!]!): [File!]!
   deleteFile(id: ID!, path: String!): File!
   updateFile(id: ID!, path: String!, filename: String!): File!
 }
