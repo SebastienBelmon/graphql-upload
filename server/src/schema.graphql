@@ -1,6 +1,5 @@
 # import Post from "./generated/prisma.graphql"
 # import File from "./generated/prisma.graphql"
-# import FileWhereUniqueInput from "./generated/prisma.graphql"
 
 scalar Upload
 
@@ -21,7 +20,7 @@ type Mutation {
   singleUpload(filename: String!, file: Upload!): File!
   multipleUpload(files: [Upload!]!): [File!]!
   deleteFile(id: ID!, path: String!): File!
-  updateFile(where: FileWhereUniqueInput!, filename: String!): File!
+  updateFile(id: ID!, path: String!, filename: String!): File!
 }
 
 type Subscription {

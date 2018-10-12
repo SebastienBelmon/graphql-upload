@@ -23,11 +23,22 @@ const processUpload = async upload => {
   return path;
 };
 
-const processDeleteFile = async path => {
+const processDeleteFile = path => {
   fs.unlink(path, err => {
     if (err) throw err;
     console.log(`${path} à été supprimé`);
   });
 };
 
-module.exports = { processUpload, processDeleteFile };
+const processUpdateFile = async (oldPath, newFilename) => {
+  const newPath = await `images/${shortid.generate()}-${newFilename}`;
+
+  fs.rename(oldPath, newPath, err => {
+    if (err) throw err;
+    console.log(`${oldPath} renommé en ${newPath}`);
+  });
+
+  return newPath;
+};
+
+module.exports = { processUpload, processDeleteFile, processUpdateFile };

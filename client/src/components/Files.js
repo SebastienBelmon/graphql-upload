@@ -2,9 +2,24 @@ import React from 'react';
 import { Query, Mutation } from 'react-apollo';
 
 import { FILES_QUERY } from '../queries/uploads';
-import { DELETEFILE_MUTATION } from '../mutations/fileMutations';
+import {
+  DELETEFILE_MUTATION,
+  UPDATEFILE_MUTATION,
+} from '../mutations/fileMutations';
 
 const Files = () => {
+  const renameFile = (id, path, updateFile) => {
+    const newName = prompt('New filename: ');
+
+    updateFile({
+      variables: {
+        id,
+        path,
+        filename: newName,
+      },
+    });
+  };
+
   return (
     <Query query={FILES_QUERY} pollInterval={1500}>
       {({ data: { files }, loading, error }) => {
@@ -24,6 +39,7 @@ const Files = () => {
                 <th>path</th>
                 <th>download link</th>
                 <th>Delete</th>
+                <th>Rename</th>
               </tr>
             </thead>
             <tbody>
@@ -60,6 +76,17 @@ const Files = () => {
                             }
                           >
                             Delete
+                          </button>
+                        )}
+                      </Mutation>
+                    </td>
+                    <td>
+                      <Mutation mutation={UPDATEFILE_MUTATION}>
+                        {updateFile => (
+                          <button
+                            onClick={() => renameFile(id, path, updateFile)}
+                          >
+                            Rename
                           </button>
                         )}
                       </Mutation>

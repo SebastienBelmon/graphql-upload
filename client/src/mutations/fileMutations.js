@@ -20,4 +20,14 @@ const DELETEFILE_MUTATION = gql`
   }
 `;
 
-export { UPLOADFILE_MUTATION, DELETEFILE_MUTATION };
+const UPDATEFILE_MUTATION = gql`
+  mutation($id: ID!, $path: String!, $filename: String!) {
+    updateFile(id: $id, path: $path, filename: $filename) {
+      id
+      path
+      filename
+    }
+  }
+`;
+
+export { UPLOADFILE_MUTATION, DELETEFILE_MUTATION, UPDATEFILE_MUTATION };
