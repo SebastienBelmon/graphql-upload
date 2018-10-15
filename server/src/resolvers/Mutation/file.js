@@ -10,6 +10,7 @@ const {
   // getPublicUrl,
   processUploadGCS,
   processDeleteGCSFile,
+  processUpdateGCSFile,
 } = require('../../storages/googleCloudStorage');
 
 const file = {
@@ -67,7 +68,8 @@ const file = {
 
   // UPDATE A FILENAME
   async updateFile(parent, { id, path, filename }, ctx, info) {
-    const newPath = await processUpdateFile(path, filename);
+    // const newPath = await processUpdateFile(path, filename);
+    const newPath = await processUpdateGCSFile(path, filename);
 
     return ctx.db.mutation.updateFile({
       where: {

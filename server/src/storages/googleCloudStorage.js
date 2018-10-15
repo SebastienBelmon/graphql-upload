@@ -63,9 +63,21 @@ const processDeleteGCSFile = async path => {
     .catch(err => console.error(err));
 };
 
+const processUpdateGCSFile = async (oldPath, newFilename) => {
+  const regex = /images\/(.*)/gm;
+  const oldFilename = regex.exec(oldPath)[0];
+  const newPath = await `images/${Date.now()}${newFilename}`;
+
+  bucket.file(oldFilename).move(newPath);
+  console.log(`${oldFilename} renommé en ${newFilename}`);
+
+  return getPublicUrl(newPath);
+};
+
 module.exports = {
   getPublicUrl,
   sendUploadToGCS,
   processUploadGCS,
   processDeleteGCSFile,
+  processUpdateGCSFile,
 };
