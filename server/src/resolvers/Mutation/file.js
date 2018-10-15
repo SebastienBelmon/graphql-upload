@@ -15,17 +15,17 @@ const file = {
   // UPLOAD A FILE
   async singleUpload(parent, { filename, file }, ctx, info) {
 
-    await processUploadGCS(file);
+    // await processUpload(file);
     
-    // return ctx.db.mutation.createFile(
-    //   {
-    //     data: {
-    //       filename,
-    //       path: await processUpload(file),
-    //     },
-    //   },
-    //   info
-    // );
+    return ctx.db.mutation.createFile(
+      {
+        data: {
+          filename,
+          path: await processUploadGCS(file),
+        },
+      },
+      info
+    );
   },
 
   // MULTIPLE UPLOAD
