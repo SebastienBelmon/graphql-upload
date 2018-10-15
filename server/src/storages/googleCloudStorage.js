@@ -25,25 +25,47 @@ const sendUploadToGCS = async ({ stream, filename, mimetype }) => {
   const path = `images/${Date.now()}${filename}`;
   const file = bucket.file(path);
 
-  return new Promise((resolve, reject) => (
+  return new Promise((resolve, reject) =>
     stream
-      .pipe(file.createWriteStream({
-        metadata: {
-          contentType: mimetype,
-        },
-        resumable: false,
-      }))
+      .pipe(
+        file.createWriteStream({
+          metadata: {
+            contentType: mimetype,
+          },
+          resumable: false,
+        })
+      )
       .on('finish', () => resolve({ path: getPublicUrl(path) }))
       .on('error', reject)
-  ));
+  );
 };
 
-const processUploadGCS = async (file) => {
+const processUploadGCS = async file => {
   // get data from uploading file
   const { stream, filename, mimetype, encoding } = await file;
   const { path } = await sendUploadToGCS({ stream, filename, mimetype });
 
   return path;
-}
+};
 
-module.exports = { getPublicUrl, sendUploadToGCS, processUploadGCS };
+const processDeleteGCSFile = async path => {
+  // search for the filename (including bucket's folder)
+  const regex = /images\/(.*)/gm;
+  const filename = regex.exec(path)[0];
+
+  const file = await bucket.file(filename);
+
+  file
+    .delete()
+    .then(() => {
+      console.log(`${filename} a bien été supprimé du Storage`);
+    })
+    .catch(err => console.error(err));
+};
+
+module.exports = {
+  getPublicUrl,
+  sendUploadToGCS,
+  processUploadGCS,
+  processDeleteGCSFile,
+};

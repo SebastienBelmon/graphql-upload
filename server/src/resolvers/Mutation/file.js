@@ -9,14 +9,14 @@ const {
 const {
   // getPublicUrl,
   processUploadGCS,
+  processDeleteGCSFile,
 } = require('../../storages/googleCloudStorage');
 
 const file = {
   // UPLOAD A FILE
   async singleUpload(parent, { filename, file }, ctx, info) {
-
     // await processUpload(file);
-    
+
     return ctx.db.mutation.createFile(
       {
         data: {
@@ -54,7 +54,9 @@ const file = {
 
   // DELETE A FILE
   async deleteFile(parent, { id, path }, ctx, info) {
-    processDeleteFile(path);
+    // processDeleteFile(path);
+
+    processDeleteGCSFile(path);
 
     return ctx.db.mutation.deleteFile({
       where: {
