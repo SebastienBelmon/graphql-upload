@@ -32,7 +32,9 @@ const file = {
   // MULTIPLE UPLOAD
   async multipleUpload(parent, { names, files }, ctx, info) {
     // resolve will get all files pathnames as an array
-    const { resolve, reject } = await promisesAll.all(files.map(processUpload));
+    // const { resolve, reject } = await promisesAll.all(files.map(processUpload));
+
+    const { resolve, reject } = await promisesAll.all(files.map(processUploadGCS));
 
     if (reject.length) {
       reject.forEach(({ name, message }) =>
