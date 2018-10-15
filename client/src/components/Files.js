@@ -44,13 +44,13 @@ const Files = () => {
             </thead>
             <tbody>
               {files.map(({ id, path, filename }) => {
-                const displayPath = path.replace(/images/gi, 'static');
+                // const displayPath = path.replace(/images/gi, 'static');
                 return (
                   <tr key={id}>
                     <td>{filename}</td>
                     <td>
                       <a
-                        href={`http://localhost:4000/${displayPath}`}
+                        href={path}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -58,7 +58,7 @@ const Files = () => {
                       </a>
                     </td>
                     <td>
-                      <a href={`http://localhost:4000/${path}`} download>
+                      <a href={path} download>
                         Download
                       </a>
                     </td>

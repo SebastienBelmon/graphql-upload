@@ -18,15 +18,15 @@ const server = new GraphQLServer({
   context: req => ({ ...req, db }),
 });
 
-// Set '/static' the access of the local dir '/images'
-server.use('/static', express.static('images'));
+// // Set '/static' the access of the local dir '/images'
+// server.use('/static', express.static('images'));
 
-// Set '/images/:file' route as download link
-server.get('/images/:file', (req, res) => {
-  const file = 'images/' + req.params.file;
-  console.log(file);
+// // Set '/images/:file' route as download link
+// server.get('/images/:file', (req, res) => {
+//   const file = 'images/' + req.params.file;
+//   console.log(file);
 
-  res.download(file);
-});
+//   res.download(file);
+// });
 
 server.start(() => console.log('Server is running on http://localhost:4000'));
